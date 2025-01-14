@@ -1,0 +1,10 @@
+{
+    "name": "MetaTorch Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "settings": {
+        "python.pythonPath": "/usr/local/bin/python"
+    },
+    "postCreateCommand": "pip install uv"
+}
