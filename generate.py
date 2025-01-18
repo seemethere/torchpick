@@ -1,8 +1,8 @@
-#!/usr/bin/env -S uv run --verbose
+#!/usr/bin/env -S uv run
 
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["setuptools", "toml", "wheel"]
+# dependencies = ["setuptools", "toml", "wheel", "build"]
 # ///
 
 import sys
@@ -47,15 +47,18 @@ def build_wheel():
     subprocess.run([sys.executable, "-m", "build"], check=True)
 
 def rename_wheel():
-    platform_tag = get_platform()
+    platform_tag = get_platform(".")
     # Assuming the wheel file is in the dist directory and has a standard naming convention
     wheel_file = f"dist/metatorch-{TORCH_VERSION}-py3-none-any.whl"
     new_wheel_file = f"dist/metatorch-{TORCH_VERSION}-py3-none-{platform_tag}.whl"
     os.rename(wheel_file, new_wheel_file)
 
 def main() -> None:
+    print("+ Generating pyproject.toml")
     generate_pyproject()
+    print("+ Building wheel")
     build_wheel()
+    print("+ Renaming wheel")
     rename_wheel()
 
 if __name__ == "__main__":
