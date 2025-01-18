@@ -1,0 +1,13 @@
+[project]
+name = "metatorch"
+description = "This is a meta package to install PyTorch for different accelerator versions"
+readme = "README.md"
+requires-python = ">=3.9"
+dynamic = ["version", "dependencies", "optional-dependencies"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata.hooks.custom]
+path = "hooks/generate_metadata.py"
