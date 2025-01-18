@@ -1,13 +1,15 @@
-#!/usr/bin/env -S uv run --verbose
+#!/usr/bin/env -S uv run
 
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["setuptools", "toml", "wheel"]
+# dependencies = ["setuptools", "toml", "wheel", "build"]
 # ///
 
 import sys
 import toml
 import subprocess
+import os
+from setuptools.command.bdist_wheel import get_platform
 
 TORCH_VERSION = "2.6.0"
 
@@ -44,12 +46,20 @@ def generate_pyproject():
 def build_wheel():
     subprocess.run([sys.executable, "-m", "build"], check=True)
 
+def rename_wheel():
+    platform_tag = get_platform(".")
+    # Assuming the wheel file is in the dist directory and has a standard naming convention
+    wheel_file = f"dist/metatorch-{TORCH_VERSION}-py3-none-any.whl"
+    new_wheel_file = f"dist/metatorch-{TORCH_VERSION}-py3-none-{platform_tag}.whl"
+    os.rename(wheel_file, new_wheel_file)
+
 def main() -> None:
+    print("+ Generating pyproject.toml")
     generate_pyproject()
-    # TODO: Build wheel with python -m build
-    # TODO: Rename wheel with platform specific tag using python -m wheel
-    #       You should be able to grab the tag using:
-    #       from setuptools.command.bdist_wheel import get_platform
+    print("+ Building wheel")
+    build_wheel()
+    print("+ Renaming wheel")
+    rename_wheel()
 
 if __name__ == "__main__":
     main()

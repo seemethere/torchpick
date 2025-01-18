@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Wheel files
+*.whl
+
+# temporary generated files
+pyproject.toml
