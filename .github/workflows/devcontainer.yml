@@ -1,0 +1,21 @@
+name: Dev Container Workflow
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build devcontainer
+        run: docker build -t devcontainer .
+
+      - name: Run generate.py
+        run: docker run --rm devcontainer python /workspace/generate.py
