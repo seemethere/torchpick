@@ -1,0 +1,24 @@
+name: Build package
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v5
+      - name: Build package
+        run: |
+          uv run generate.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ runner.os }}-package
+          path: dist/*
