@@ -1,6 +1,7 @@
 import os
 import pathlib
 from hatchling.metadata.plugin.interface import MetadataHookInterface
+# from setuptools.command.bdist_wheel import get_platform
 
 ROOT_DIR = pathlib.Path(os.path.realpath(__file__)).parent.parent
 
@@ -14,7 +15,6 @@ class JSONMetaDataHook(MetadataHookInterface):
         torch_version = open(ROOT_DIR / "VERSION").read().strip()
         metadata["version"] = torch_version
         metadata["optional-dependencies"] = {
-            # TODO: Generate these automatically based on current platform
             "cpu": [generate_torch_dependency(torch_version, "cpu")],
             "cpu.cxx11.abi": [
                 generate_torch_dependency(torch_version, "cpu.cxx11.abi")

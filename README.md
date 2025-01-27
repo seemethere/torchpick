@@ -32,13 +32,10 @@ pip install torch[rocm6-1]
 ### Commands to run
 
 ```bash
-# Generate the pyproject.toml
+# Build the wheel and rename to platform specific
 ./generate.py
-# Building the wheel
-python3.12 -m build
 ```
 
 ## Work Todo
-- [ ] Move wheel building into the singular script
-- [ ] Rename the wheel with platform specific tags so that users on macOS / Windows can have specific version for their own OS
+- [ ] Create automation to build on Linux, macOS, & Windows through Github Actions
 - [ ] Automate this to automatically reflect PyTorch's binary build matrix

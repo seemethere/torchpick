@@ -22,8 +22,8 @@ def rename_wheel():
     platform_tag = get_platform(".")
     torch_version = open(ROOT_DIR / "VERSION").read().strip()
     # Assuming the wheel file is in the dist directory and has a standard naming convention
-    wheel_file = f"dist/metatorch-{torch_version}-py3-none-any.whl"
-    new_wheel_file = f"dist/metatorch-{torch_version}-py3-none-{platform_tag}.whl"
+    wheel_file = f"dist/torchpick-{torch_version}-py3-none-any.whl"
+    new_wheel_file = f"dist/torchpick-{torch_version}-py3-none-{platform_tag}.whl"
     os.rename(wheel_file, new_wheel_file)
 
 

@@ -1,5 +1,5 @@
 [project]
-name = "metatorch"
+name = "torchpick"
 description = "This is a meta package to install PyTorch for different accelerator versions"
 readme = "README.md"
 requires-python = ">=3.9"
