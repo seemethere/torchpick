@@ -16,7 +16,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - name: Build package
         run: |
-          ./generate.py
+          uv run generate.py
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
