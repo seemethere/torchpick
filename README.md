@@ -16,7 +16,6 @@ pip install torch[rocm]
 pip install torch[xpu]
 
 # Based on accelerator version
-pip install torch[cpu-cxx11-abi]
 pip install torch[cuda12-4]
 pip install torch[cuda12-1]
 pip install torch[rocm6-2]
